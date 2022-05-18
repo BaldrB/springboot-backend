@@ -5,14 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
-//@NoArgsConstructor
-//@AllArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Dorama")
 
@@ -34,7 +35,25 @@ public class Dorama {
     @Column(name = "dorama_city")
     private String doramaCity;
 
-    @Column
-    private List<String> doramaTag;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "dorama", cascade=CascadeType.ALL)
+    private List<Tagdorama> dorama;
+
+    // public Dorama() {}
+
+    // public long getId() {
+    //     return this.id;
+    // }
+
+    // public void setId(long id) {
+    //     this.id = id;
+    // }
+
+    // public List<Tagdorama> getTagdorama() {
+    //     return this.dorama;
+    // }
+
+    // public void setTagdorama(List<Tagdorama> dorama) {
+    //     this.dorama = dorama;
+    // }
     
 }
