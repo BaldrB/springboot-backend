@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Getter
 @Setter
@@ -20,14 +22,15 @@ public class Tagdorama {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private long id;
 
     @Column
     private String tag;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dorama_id")
-    private Dorama dorama;
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "doramaTag", cascade=CascadeType.ALL)
+    @JsonIgnore
+    private List<Dorama> dorama = new ArrayList<>();
+
 
     // public Tagdorama() {
     // }

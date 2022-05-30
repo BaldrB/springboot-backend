@@ -1,0 +1,36 @@
+[
+    {
+        "id": 1,
+        "doramaName": "Падающая звезда",
+        "doramaDescript": "Много текста",
+        "doramaImg": "еще нет",
+        "doramaCity": "Южная Корея",
+        "doramaTag": [
+            {
+                "id": 1,
+                "tag": "комедия"
+            },
+            {
+                "id": 2,
+                "tag": "боевик"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "doramaName": "Дорама Завтра",
+        "doramaDescript": "Много текста",
+        "doramaImg": "еще нет",
+        "doramaCity": "Южная Корея",
+        "doramaTag": [
+            {
+                "id": 1,
+                "tag": "tag1"
+            },
+            {
+                "id": 2,
+                "tag": "tag2"
+            }
+        ]
+    }
+]

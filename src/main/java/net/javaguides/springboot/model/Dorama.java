@@ -26,6 +26,7 @@ public class Dorama {
     @Column(name = "dorama_name")
     private String doramaName;
 
+    @Lob
     @Column(name = "dorama_descript")
     private String doramaDescript;
 
@@ -35,8 +36,17 @@ public class Dorama {
     @Column(name = "dorama_city")
     private String doramaCity;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "dorama", cascade=CascadeType.ALL)
-    private List<Tagdorama> dorama;
+    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @JoinTable(name = "dorama_tagdorama",
+        joinColumns = @JoinColumn(name = "dorama_id"),
+        inverseJoinColumns = @JoinColumn(name = "tagdorama_id")
+    )
+    private List<Tagdorama> doramaTag = new ArrayList<>();
+
+    public void addDoramaTag(Tagdorama tagdorama){
+        this.doramaTag.add(tagdorama);
+        tagdorama.getDorama().add(this);
+    }
 
     // public Dorama() {}
 
