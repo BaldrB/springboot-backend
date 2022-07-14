@@ -1,14 +1,11 @@
 package net.javaguides.springboot.controller;
 
-import net.javaguides.springboot.exception.ResourceNotFoundException;
 import net.javaguides.springboot.model.Dorama;
 import net.javaguides.springboot.model.Tagdorama;
 import net.javaguides.springboot.repository.DoramaRepository;
 import net.javaguides.springboot.repository.TagdoramaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +29,9 @@ public class DoramaController {
     // build create employee REAST API
     @PostMapping
     public Dorama createDorama(@RequestBody Dorama dorama){
+
+        dorama.setDoramaImg("http://code.kupava.by:8080/files/" + dorama.getDoramaImg());
+
         for(Tagdorama tag : tagdoramaRepository.findAll()) {
             dorama.addDoramaTag(tag);
         }

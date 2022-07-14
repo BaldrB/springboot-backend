@@ -36,34 +36,42 @@ public class Dorama {
     @Column(name = "dorama_city")
     private String doramaCity;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinTable(name = "dorama_tagdorama",
-        joinColumns = @JoinColumn(name = "dorama_id"),
-        inverseJoinColumns = @JoinColumn(name = "tagdorama_id")
-    )
+    @Lob
+    private byte[] data;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "dorama_tagdorama", joinColumns = @JoinColumn(name = "dorama_id"), inverseJoinColumns = @JoinColumn(name = "tagdorama_id"))
     private List<Tagdorama> doramaTag = new ArrayList<>();
 
-    public void addDoramaTag(Tagdorama tagdorama){
+    public void addDoramaTag(Tagdorama tagdorama) {
         this.doramaTag.add(tagdorama);
         tagdorama.getDorama().add(this);
+    }
+
+    public byte[] getData() {
+        return data;
+    }
+
+    public void setData(byte[] data) {
+        this.data = data;
     }
 
     // public Dorama() {}
 
     // public long getId() {
-    //     return this.id;
+    // return this.id;
     // }
 
     // public void setId(long id) {
-    //     this.id = id;
+    // this.id = id;
     // }
 
     // public List<Tagdorama> getTagdorama() {
-    //     return this.dorama;
+    // return this.dorama;
     // }
 
     // public void setTagdorama(List<Tagdorama> dorama) {
-    //     this.dorama = dorama;
+    // this.dorama = dorama;
     // }
-    
+
 }
