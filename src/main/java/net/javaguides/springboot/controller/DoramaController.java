@@ -1,11 +1,14 @@
 package net.javaguides.springboot.controller;
 
+import net.javaguides.springboot.exception.ResourceNotFoundException;
 import net.javaguides.springboot.model.Dorama;
 import net.javaguides.springboot.model.Tagdorama;
 import net.javaguides.springboot.repository.DoramaRepository;
 import net.javaguides.springboot.repository.TagdoramaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,6 +39,15 @@ public class DoramaController {
             dorama.addDoramaTag(tag);
         }
         return doramaRepository.save(dorama);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<HttpStatus> deleteDorama(@PathVariable long id){
+        Dorama dorama = doramaRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("dorma not exist with id" + id));
+        doramaRepository.delete(dorama);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     // // build get emloyee by id REST API
